@@ -3,5 +3,5 @@
 rm -rf dist/
 python setup.py clean --all
 python setup.py sdist bdist_wheel
-pip uninstall -y pod_whois
+pip uninstall -y pod-whois
 pip install dist/*.whl

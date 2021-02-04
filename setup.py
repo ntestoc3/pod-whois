@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 with open(path.join(here, "requirements.in"), encoding='utf-8') as f:
     requirements = f.read().splitlines()
 
-setup(name='pod_whois',
+setup(name='pod-whois',
       version=0.1,
       description='Babashka pod query whois info.',
       author='ntestoc3',
@@ -20,7 +20,7 @@ setup(name='pod_whois',
       keywords='babashka pod whois',
       long_description=long_description,
       long_description_content_type="text/markdown",
-      license="Expat",
+      license="MIT",
 
       include_package_data=True,
       packages=["pod_whois"],
