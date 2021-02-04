@@ -39,3 +39,5 @@ pip install -r requirements.txt
 ## License
 
 Copyright © 2021 ntestoc3
+
+Distributed under the MIT License. See LICENSE.md.

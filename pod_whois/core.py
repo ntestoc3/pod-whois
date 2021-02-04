@@ -5,12 +5,11 @@ import sys
 import traceback
 from logging.handlers import RotatingFileHandler
 
+import bcoding
 import validators
 import whois
 from ipwhois import IPWhois
 from retry import retry
-
-import bcoding
 
 
 def write(data):
@@ -23,15 +22,6 @@ def read():
     logging.info("read data: %s", r)
     return r
 
-def format_nest_date(data):
-    if isinstance(data, (datetime.date, datetime.datetime)):
-        return data.isoformat()
-    elif isinstance(data, list):
-        return [format_nest_date(x) for x in data]
-    elif isinstance(data, dict):
-        return {k:format_nest_date(v) for k,v in data.items()}
-    else:
-        return data
 
 @retry(Exception, delay=100, backoff=4, max_delay=280, tries=5)
 def query(target):
@@ -41,7 +31,7 @@ def query(target):
                                     inc_nir=True)
     elif validators.domain(target):
         result = whois.whois(target)
-        return format_nest_date(result)
+        return result
     else:
         logging.error(f"[whois query] not valid target: {target}")
         return None
@@ -62,6 +52,10 @@ logging.basicConfig(level=logging.WARN,
                     style="{",
                     format="{asctime} [{levelname}] {filename}({funcName})[{lineno}] {message}")
 
+def json_default(o):
+    if isinstance(o, (datetime.date, datetime.datetime)):
+        return o.isoformat()
+
 def main():
     while True:
         try:
@@ -79,7 +73,7 @@ def main():
                 try:
                     if f:
                         value = f(*args)
-                        reply = {"value": json.dumps(value),
+                        reply = {"value": json.dumps(value, default=json_default),
                                  "id": id,
                                  "status": ["done"]}
                         write(reply)

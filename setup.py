@@ -12,7 +12,7 @@ with open(path.join(here, "requirements.in"), encoding='utf-8') as f:
     requirements = f.read().splitlines()
 
 setup(name='pod-whois',
-      version=0.1,
+      version=0.2,
       description='Babashka pod query whois info.',
       author='ntestoc3',
       author_email='ntoooooon@outlook.com',
