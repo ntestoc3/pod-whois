@@ -1,5 +1,5 @@
 
-# pod_whois
+# pod-whois
 A [babashka pod](https://github.com/babashka/babashka.pods) for whois query.
 
 Implemented using the Python [python-whois](https://pypi.org/project/python-whois/) and [ipwhois](https://pypi.org/project/ipwhois/) library.
